@@ -90,3 +90,33 @@ local Slider = Tab:CreateSlider({
    game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
    end,
 })
+
+local Toggle = Tab:CreateToggle({
+   Name = "Slap Aura",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+getgenv().SlapAura = Value
+            if bool == true then
+                while getgenv().SlapAura do
+                    task.wait(.005)
+                        pcall(function()
+                        for Index, Player in next, game.Players:GetPlayers() do
+                            if Player ~= game.Players.LocalPlayer and Player.Character and Player.Character:FindFirstChild("entered") then
+                                if Player.Character:FindFirstChild("Head") then
+                                if Player.Character.Head:FindFirstChild("UnoReverseCard") == nil and Player.Character:FindFirstChild("rock") == nil then 
+                                    if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                                    local Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude
+                                    if 25 >= Magnitude then
+                                        shared.gloveHits[getGlove()]:FireServer(Player.Character:WaitForChild("Head"))
+                                end
+                                    end
+                            end
+                                end
+                        end
+                        end
+                    end)
+                end
+            end
+   end,
+})
